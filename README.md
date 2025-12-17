@@ -86,7 +86,7 @@ Ao inspecionar a rede (Network Tab) do navegador Chrome, identificamos que:
    - Cole o payload com sintaxe JSON válida
 
 
-## ❓ Por que POST e não GET?
+### ❓ Por que POST e não GET?
 
 Durante a análise, você pode ter estranhado o fato de usarmos o método **POST** para buscar dados, já que, pela convenção do protocolo HTTP, o método **GET** é o padrão para leitura de informações e o **POST** para envio/criação.
 
