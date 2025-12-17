@@ -438,5 +438,5 @@ Este projeto é apenas para fins educacionais e demonstração de técnicas de e
 
 ---
 
-**Última atualização:** Dezembro 2024
+**Última atualização:** Dezembro 2025
 
