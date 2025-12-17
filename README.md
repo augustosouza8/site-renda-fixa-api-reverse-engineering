@@ -85,6 +85,33 @@ Ao inspecionar a rede (Network Tab) do navegador Chrome, identificamos que:
    - Selecione **raw** e **JSON**
    - Cole o payload com sintaxe JSON válida
 
+
+## ❓ Por que POST e não GET?
+
+Durante a análise, você pode ter estranhado o fato de usarmos o método **POST** para buscar dados, já que, pela convenção do protocolo HTTP, o método **GET** é o padrão para leitura de informações e o **POST** para envio/criação.
+
+**O motivo é a complexidade dos filtros.**
+
+Esta API utiliza uma prática conhecida como **"Search via POST"** pelos seguintes motivos:
+
+1.  **Limitação do GET (A "Carta Aberta"):**
+    No método GET, todos os parâmetros precisam ser passados na URL (ex: `api.com?tipo=cdb&prazo=100`). Quando temos filtros complexos (listas de emissores, múltiplos indexadores, faixas de datas), a URL ficaria excessivamente longa, difícil de ler e poderia esbarrar no limite de caracteres dos navegadores/servidores.
+
+2.  **Robustez do POST (O "Envelope Fechado"):**
+    O método POST permite enviar os dados dentro do **Body (Corpo)** da requisição. Isso possibilita o envio de um objeto JSON estruturado, limpo e sem limite de tamanho, ideal para passar a configuração complexa que a API exige:
+
+    ```json
+    // No POST, podemos enviar estruturas complexas assim:
+    {
+      "tipo": ["cdb", "lci", "lca"],
+      "indexador": ["ipca", "cdi"],
+      "vencimento": { "min": 0, "max": 1800 }
+    }
+    ```
+
+Em resumo: embora semanticamente seja uma "busca" (GET), tecnicamente o POST é mais eficiente para transportar o "pacote" de filtros que o site precisa.
+
+
 ### Erros Comuns e Soluções
 
 #### Erro 1: 405 Method Not Allowed
